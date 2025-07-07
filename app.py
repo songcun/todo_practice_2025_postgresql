@@ -1,6 +1,8 @@
 from flask import Flask, render_template,request
 import psycopg2
 import psycopg2.extras
+import os
+
 # FlaskとPostgreSQLを使ったToDoアプリケーション
 
 # app という名前でFlask アプリケーションを作成
@@ -10,8 +12,8 @@ app = Flask(__name__)
 def get_db():
     # PostgreSQLデータベースに接続
     conn = psycopg2.connect(
-        host="localhost",
-        database="todo",
+        host=os.environ.get('DATABASE_URL'),
+        database="todo-postgre",
         user="shinmatsumura",
         password="password",  # 実際のパスワードに置き換えてください
         port=5432
