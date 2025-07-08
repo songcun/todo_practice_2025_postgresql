@@ -7,17 +7,19 @@ import os
 
 # app という名前でFlask アプリケーションを作成
 app = Flask(__name__)
+db_url = os.environ.get("DATABASE_URL")
 
 # データベース接続
 def get_db():
     # PostgreSQLデータベースに接続
-    conn = psycopg2.connect(
-        host=os.environ.get('DATABASE_URL'),
-        database="todo-postgre",
-        user="shinmatsumura",
-        password="password",  # 実際のパスワードに置き換えてください
-        port=5432
-    )
+    # conn = psycopg2.connect(
+    #     host=os.environ.get('DATABASE_URL'),
+    #     database="todo-postgre",
+    #     user="shinmatsumura",
+    #     password="password",  # 実際のパスワードに置き換えてください
+    #     port=5432
+    # )
+    conn = psycopg2.connect(db_url, sslmode='require')
     return conn
 
 # def get_db():
